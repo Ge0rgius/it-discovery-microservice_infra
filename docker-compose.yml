@@ -7,8 +7,12 @@ services:
       dockerfile: src/main/resources/book.dockerfile
     expose:
       - 8080
+    depends_on:
+      - config-server
+      - kafka
     environment:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
+      - CONFIG_SERVER_HOST=config-server
     ports:
       - "8080:8080"
   order:
@@ -17,6 +21,8 @@ services:
       dockerfile: src/main/resources/order.dockerfile
     environment:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
+    depends_on:
+      - kafka
     expose:
       - 8080
     ports:
@@ -25,6 +31,8 @@ services:
     build:
       context: payment-service
       dockerfile: src/main/resources/payment.dockerfile
+    depends_on:
+      - kafka
     environment:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
       - ORDER_SERVICE_URL=http://order:8080
@@ -40,6 +48,8 @@ services:
     build:
       context: delivery-service
       dockerfile: src/main/resources/delivery.dockerfile
+    depends_on:
+      - kafka
     expose:
       - 8080
     environment:
@@ -76,8 +86,6 @@ services:
       context: config-server
       dockerfile: server.dockerfile
     expose:
-      - 8080
-    environment:
-      - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
+      - 8888
     ports:
-      - "8080:8080"
+      - "8888:8888"
