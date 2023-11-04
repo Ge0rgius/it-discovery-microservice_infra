@@ -8,11 +8,13 @@ services:
     expose:
       - 8080
     depends_on:
+      - eureka
       - config-server
       - kafka
     environment:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
-      - CONFIG_SERVER_HOST=config-server
+      #      - CONFIG_SERVER_HOST=config-server
+      - EUREKA_HOST=eureka
     ports:
       - "8080:8080"
   order:
@@ -87,6 +89,10 @@ services:
     build:
       context: config-server
       dockerfile: server.dockerfile
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_HOST=eureka
     expose:
       - 8888
     ports:
