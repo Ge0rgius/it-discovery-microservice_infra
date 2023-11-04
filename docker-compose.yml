@@ -89,3 +89,11 @@ services:
       - 8888
     ports:
       - "8888:8888"
+  eureka:
+    build:
+      context: eureka-server
+      dockerfile: eureka.dockerfile
+    expose:
+      - 8090
+    ports:
+      - "8090:8090"
