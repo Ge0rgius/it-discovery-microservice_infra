@@ -2,7 +2,9 @@ package it.discovery.payment;
 
 import it.discovery.order.client.api.OrderClient;
 import it.discovery.order.client.api.OrderFacade;
+import it.discovery.payment.domain.Customer;
 import it.discovery.payment.domain.PaymentProvider;
+import it.discovery.payment.persistence.CustomerRepository;
 import it.discovery.payment.persistence.PaymentProviderRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,18 +26,16 @@ public class PaymentApplication {
 
     @Bean
     ApplicationRunner applicationRunner(
-            PaymentProviderRepository paymentProviderRepository) {
+            PaymentProviderRepository paymentProviderRepository, CustomerRepository customerRepository) {
         return args -> {
             PaymentProvider provider = new PaymentProvider();
             provider.setName("Stripe");
             paymentProviderRepository.save(provider);
 
-//            Customer customer = new Customer();
-//            customer.setId(1);
-//            customer.setName("Sam Newman");
-//            customer.setEmail("sam.newman@gmail.com");
-//            customer.setProvider(provider);
-//            customerRepository.save(customer);
+            Customer customer = new Customer();
+            customer.setName("Sam Newman");
+            customer.setProvider(provider);
+            customerRepository.save(customer);
         };
     }
 }

@@ -17,7 +17,7 @@ public class KafkaDeliveryConsumer {
     @Autowired
     private DeliveryService deliveryService;
 
-    @KafkaListener(topics = "")
+    @KafkaListener(topics = "payments")
     void handle(IntegrationEvent event) {
         log.info(STR. "Delivery service received event: \{ event }" );
 
