@@ -3,14 +3,14 @@ spring:
     import: configserver:http://${CONFIG_SERVER_HOST:localhost}:8888
   application:
     name: book-service
-  kafka:
-    consumer:
-      bootstrap-servers:
-        - ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
-      group-id: book
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring.json.trusted.packages: "*"
+#  kafka:
+#    consumer:
+#      bootstrap-servers:
+#        - ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+#      group-id: book
+#      auto-offset-reset: earliest
+#      key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#      properties:
+#        spring.json.trusted.packages: "*"
 
