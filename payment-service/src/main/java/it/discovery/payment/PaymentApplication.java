@@ -10,8 +10,10 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -22,8 +24,14 @@ public class PaymentApplication {
     }
 
     @Bean
-    OrderFacade orderFacade(Environment env) {
-        return new OrderClient(env.getRequiredProperty("ORDER_SERVICE_URL"));
+    @LoadBalanced
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    @Bean
+    OrderFacade orderFacade(Environment env, RestTemplate restTemplate) {
+        return new OrderClient("http://order-service", restTemplate);
     }
 
     @Bean

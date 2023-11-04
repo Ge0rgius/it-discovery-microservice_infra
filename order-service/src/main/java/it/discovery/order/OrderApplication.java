@@ -5,8 +5,10 @@ import it.discovery.order.persistence.CustomerRepository;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
+@EnableDiscoveryClient
 @SpringBootApplication
 public class OrderApplication {
 
@@ -17,7 +19,7 @@ public class OrderApplication {
     @Bean
     public ApplicationRunner applicationRunner(
             CustomerRepository customerRepository) {
-        return args -> {
+        return _ -> {
 
             Customer customer = new Customer();
             customer.setId(1);

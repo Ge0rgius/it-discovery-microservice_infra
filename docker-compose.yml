@@ -23,6 +23,7 @@ services:
       dockerfile: src/main/resources/order.dockerfile
     environment:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
+      - EUREKA_HOST=eureka
     depends_on:
       - kafka
     expose:
@@ -38,7 +39,7 @@ services:
       - eureka
     environment:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
-      - ORDER_SERVICE_URL=http://order:8080
+      #      - ORDER_SERVICE_URL=http://order:8080
       - EUREKA_HOST=eureka
     expose:
       - 8080

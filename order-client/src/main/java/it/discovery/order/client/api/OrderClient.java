@@ -21,8 +21,9 @@ public class OrderClient implements OrderFacade {
 
     private final RetryConfig retryConfig;
 
-    public OrderClient(String baseUrl) {
+    public OrderClient(String baseUrl, RestTemplate restTemplate) {
         this.baseUrl = baseUrl;
+        this.restTemplate = restTemplate;
         retryConfig = RetryConfig.custom()
                 .maxAttempts(3)
                 .retryExceptions(IOException.class, RestClientException.class)
@@ -30,7 +31,7 @@ public class OrderClient implements OrderFacade {
                 .build();
     }
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
 
     @Override
     public List<OrderDTO> findAll() {

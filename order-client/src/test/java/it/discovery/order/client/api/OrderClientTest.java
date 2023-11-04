@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -30,7 +31,7 @@ class OrderClientTest {
 
     @BeforeEach
     void setup() {
-        orderClient = new OrderClient(wm.baseUrl());
+        orderClient = new OrderClient(wm.baseUrl(), new RestTemplate());
     }
 
     @Test
