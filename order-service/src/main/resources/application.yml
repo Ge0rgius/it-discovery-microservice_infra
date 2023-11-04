@@ -1,0 +1,16 @@
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers:
+        - ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+      group-id: order
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+    producer:
+      bootstrap-servers:
+        - ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+      key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
