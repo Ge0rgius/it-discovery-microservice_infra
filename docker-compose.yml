@@ -106,3 +106,11 @@ services:
       - 8090
     ports:
       - "8090:8090"
+  gateway:
+    build:
+      context: gateway
+      dockerfile: gateway.dockerfile
+    expose:
+      - 8080
+    ports:
+      - "8099:8080"
