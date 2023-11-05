@@ -1,0 +1,22 @@
+﻿version: '3.9'
+
+services:
+  consul-server1:
+    image: hashicorp/consul:1.17
+    ports:
+      - "8500:8500"
+      - "8600:8600/tcp"
+      - "8600:8600/udp"
+    command: "agent -client 0.0.0.0 -node=node0 -server -ui -bootstrap-expect=3 -retry-join consul-server2 -retry-join consul-server3"
+
+  consul-server2:
+    image: hashicorp/consul:1.17
+    command: "agent -client 0.0.0.0 -node=node1 -server -bootstrap-expect=3 -retry-join consul-server1 -retry-join consul-server3"
+
+  consul-server3:
+    image: hashicorp/consul:1.17
+    command: "agent -client 0.0.0.0 -node=node2 -server -bootstrap-expect=3 -retry-join consul-server1 -retry-join consul-server2"
+
+  consul-client:
+    image: hashicorp/consul:1.17
+    command: "agent -client 0.0.0.0 -node=client -server -retry-join consul-server1 -retry-join consul-server2 -retry-join consul-server3"
