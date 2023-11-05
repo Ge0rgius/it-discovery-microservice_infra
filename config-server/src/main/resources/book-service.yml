@@ -1,4 +1,4 @@
-spring:
-  kafka:
-    consumer:
-      group-id: book
+#spring:
+#  kafka:
+#    consumer:
+#      group-id: book

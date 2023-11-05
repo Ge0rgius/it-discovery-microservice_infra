@@ -40,8 +40,8 @@ services:
       - consul-server1
     environment:
       - CONSUL_HOST=consul-server1
-  config-server:
-    depends_on:
-      - consul-server1
-    environment:
-      - CONSUL_HOST=consul-server1
+#  config-server:
+#    depends_on:
+#      - consul-server1
+#    environment:
+#      - CONSUL_HOST=consul-server1
