@@ -27,6 +27,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Testcontainers
+//TODO use dynamic port. See OrderClientTest
 @WireMockTest(httpPort = 8081)
 @AutoConfigureJsonTesters
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, properties = "eureka.client.enabled:false")
