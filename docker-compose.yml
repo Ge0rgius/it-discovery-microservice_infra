@@ -43,8 +43,9 @@ services:
     environment:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
       #      - ORDER_SERVICE_URL=http://order:8080
-      - EUREKA_HOST=eureka
+      #      - EUREKA_HOST=eureka
       - ZOOKEEPER_HOST=zookeeper
+      - ZIPKIN_HOST=zipkin
     expose:
       - 8080
     ports:
