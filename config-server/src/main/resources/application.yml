@@ -15,7 +15,7 @@ spring:
       properties:
         spring.json.trusted.packages: "*"
 server:
-  port: 8888
+  port: 8899
 #spring:
 #  cloud:
 #    config:

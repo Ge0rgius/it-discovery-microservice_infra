@@ -100,9 +100,9 @@ services:
       - EUREKA_HOST=eureka
       - ZOOKEEPER_HOST=zookeeper
     expose:
-      - 8888
+      - 8899
     ports:
-      - "8888:8888"
+      - "8899:8899"
   #  eureka:
   #    build:
   #      context: eureka-server
