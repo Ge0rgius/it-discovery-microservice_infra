@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = "it.discovery")
 public class PaymentApplication {
 
     public static void main(String[] args) {
