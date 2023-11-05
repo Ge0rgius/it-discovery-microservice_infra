@@ -20,7 +20,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Testcontainers
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, properties = "eureka.client.enabled:false")
 class PaymentServiceTest {
 
     @MockBean
@@ -41,6 +41,7 @@ class PaymentServiceTest {
         int orderId = 100;
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setId(orderId);
+        orderDTO.setCustomerId(1);
 
         BDDMockito.given(orderFacade.findOne(orderId)).willReturn(Optional.of(orderDTO));
         paymentService.pay(orderId);
