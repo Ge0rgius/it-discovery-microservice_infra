@@ -19,4 +19,29 @@ services:
 
   consul-client:
     image: hashicorp/consul:1.17
-    command: "agent -client 0.0.0.0 -node=client -server -retry-join consul-server1 -retry-join consul-server2 -retry-join consul-server3"
+    command: "agent -client 0.0.0.0 -node=client -retry-join consul-server1 -retry-join consul-server2 -retry-join consul-server3"
+  gateway:
+    depends_on:
+      - consul-server1
+    environment:
+      - CONSUL_HOST=consul-server1
+  payment:
+    depends_on:
+      - consul-server1
+    environment:
+      - CONSUL_HOST=consul-server1
+  order:
+    depends_on:
+      - consul-server1
+    environment:
+      - CONSUL_HOST=consul-server1
+  book:
+    depends_on:
+      - consul-server1
+    environment:
+      - CONSUL_HOST=consul-server1
+  config-server:
+    depends_on:
+      - consul-server1
+    environment:
+      - CONSUL_HOST=consul-server1

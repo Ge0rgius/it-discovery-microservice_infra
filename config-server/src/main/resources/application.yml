@@ -1,10 +1,12 @@
 spring:
   cloud:
-    zookeeper:
-      discovery:
-        enabled: true
-        register: true
-      connect-string: ${ZOOKEEPER_HOST:localhost}:2181
+    consul:
+      host: ${CONSUL_HOST:localhost}
+  #    zookeeper:
+  #      discovery:
+  #        enabled: true
+  #        register: true
+  #      connect-string: ${ZOOKEEPER_HOST:localhost}:2181
   kafka:
     consumer:
       bootstrap-servers:

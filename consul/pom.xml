@@ -7,9 +7,6 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>consul</artifactId>
-    <properties>
-        <spring.cloud.consul.version>4.0.3</spring.cloud.consul.version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -20,15 +17,4 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-consul-dependencies</artifactId>
-                <version>${spring.cloud.consul.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 </project>

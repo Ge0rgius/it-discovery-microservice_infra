@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  eureka:
+    build:
+      context: eureka-server
+      dockerfile: eureka.dockerfile
+    expose:
+      - 8090
+    ports:
+      - "8090:8090"
+  gateway:
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_HOST=eureka
+  payment:
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_HOST=eureka
+  order:
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_HOST=eureka
+  book:
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_HOST=eureka
+  config-server:
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_HOST=eureka

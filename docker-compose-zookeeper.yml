@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  zookeeper:
+    image: zookeeper
+    ports:
+      - "2181:2181"
+      - "2888:2888"
+      - "3888:3888"
+      - "8888:8888"
+      - "9080:8080"
+  gateway:
+    depends_on:
+      - zookeeper
+    environment:
+      - ZOOKEEPER_HOST=zookeeper
+  payment:
+    depends_on:
+      - zookeeper
+    environment:
+      - ZOOKEEPER_HOST=zookeeper
+  order:
+    depends_on:
+      - zookeeper
+    environment:
+      - ZOOKEEPER_HOST=zookeeper
+  book:
+    depends_on:
+      - zookeeper
+    environment:
+      - ZOOKEEPER_HOST=zookeeper
+  config-server:
+    depends_on:
+      - zookeeper
+    environment:
+      - ZOOKEEPER_HOST=zookeeper
