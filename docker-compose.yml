@@ -110,6 +110,10 @@ services:
     build:
       context: gateway
       dockerfile: gateway.dockerfile
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_HOST=eureka
     expose:
       - 8080
     ports:
