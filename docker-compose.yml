@@ -132,3 +132,7 @@ services:
       - "3888:3888"
       - "8888:8888"
       - "9080:8080"
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
