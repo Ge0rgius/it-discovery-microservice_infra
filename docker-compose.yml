@@ -8,13 +8,14 @@ services:
     expose:
       - 8080
     depends_on:
-      - eureka
+      - zookeeper
       - config-server
       - kafka
     environment:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
       #      - CONFIG_SERVER_HOST=config-server
       - EUREKA_HOST=eureka
+      - ZOOKEEPER_HOST=zookeeper
     ports:
       - "8080:8080"
   order:
@@ -24,8 +25,10 @@ services:
     environment:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
       - EUREKA_HOST=eureka
+      - ZOOKEEPER_HOST=zookeeper
     depends_on:
       - kafka
+      - zookeeper
     expose:
       - 8080
     ports:
@@ -36,11 +39,12 @@ services:
       dockerfile: src/main/resources/payment.dockerfile
     depends_on:
       - kafka
-      - eureka
+      - zookeeper
     environment:
       - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
       #      - ORDER_SERVICE_URL=http://order:8080
       - EUREKA_HOST=eureka
+      - ZOOKEEPER_HOST=zookeeper
     expose:
       - 8080
     ports:
@@ -91,30 +95,40 @@ services:
       context: config-server
       dockerfile: server.dockerfile
     depends_on:
-      - eureka
+      - zookeeper
     environment:
       - EUREKA_HOST=eureka
+      - ZOOKEEPER_HOST=zookeeper
     expose:
       - 8888
     ports:
       - "8888:8888"
-  eureka:
-    build:
-      context: eureka-server
-      dockerfile: eureka.dockerfile
-    expose:
-      - 8090
-    ports:
-      - "8090:8090"
+  #  eureka:
+  #    build:
+  #      context: eureka-server
+  #      dockerfile: eureka.dockerfile
+  #    expose:
+  #      - 8090
+  #    ports:
+  #      - "8090:8090"
   gateway:
     build:
       context: gateway
       dockerfile: gateway.dockerfile
     depends_on:
-      - eureka
+      - zookeeper
     environment:
       - EUREKA_HOST=eureka
+      - ZOOKEEPER_HOST=zookeeper
     expose:
       - 8080
     ports:
       - "8099:8080"
+  zookeeper:
+    image: zookeeper
+    ports:
+      - "2181:2181"
+      - "2888:2888"
+      - "3888:3888"
+      - "8888:8888"
+      - "9080:8080"

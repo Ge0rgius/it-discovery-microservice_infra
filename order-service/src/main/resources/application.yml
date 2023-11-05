@@ -1,4 +1,9 @@
-spring:
+cloud:
+  zookeeper:
+    discovery:
+      enabled: true
+      register: true
+    connect-string: ${ZOOKEEPER_HOST:localhost}:2181
   application:
     name: order-service
   kafka:
