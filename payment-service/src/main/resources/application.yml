@@ -1,6 +1,7 @@
 loadbalancer:
   client:
     name: order-service
+spring:
   cloud:
     zookeeper:
       discovery:
