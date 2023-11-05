@@ -11,9 +11,9 @@ import java.util.Optional;
 @FeignClient("order-service")
 public interface OrderFacade {
 
-    @GetMapping
+    @GetMapping("orders")
     List<OrderDTO> findAll();
 
-    @GetMapping("{orderId}")
+    @GetMapping("orders/{orderId}")
     Optional<OrderDTO> findOne(@PathVariable int orderId);
 }
